@@ -7,7 +7,7 @@ export default function Home() {
         <Header />
         <div>
           <h1 className="text-3xl font-bold underline">
-            Hello world!
+            Hello
           </h1>
         </div>
       </main>

@@ -10,7 +10,7 @@
   --button: #3FA9F5;
   --border: #D2E6F9;
   --secundary-border: #4A4A4A;
-  --secondary-background: #D0E7FF;
+  --secundary-background: #D0E7FF;
 }
 
 .dark {
@@ -23,7 +23,7 @@
   --button: #3FA9F5;
   --border: #2A3442;
   --secundary-border: #A8B3C9;
-  --secondary-background: #222A36;
+  --secundary-background: #222A36;
 }
 
 body {
