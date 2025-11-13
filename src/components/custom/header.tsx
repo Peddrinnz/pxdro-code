@@ -35,67 +35,69 @@ const Header = () => {
 
     return (
         <>
-            <header className="bg-(--secundary-background) px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between border-b border-(--border) relative">
-                <h1 className="text-xl sm:text-2xl font-semibold">{'{ Pxdro Code }'}</h1>
+            <header className="bg-(--secundary-background) px-4 sm:px-6 lg:px-8 py-6 border-b border-(--border) relative">
+                <div className="max-w-7xl mx-auto flex items-center justify-between">
+                    <h1 className="text-xl sm:text-2xl font-semibold">{'{ Pxdro Code }'}</h1>
 
-                <nav className="hidden md:flex space-x-6 text-[18px]">
-                    {navItems.map((item) => (
-                        <a
-                            key={item.href}
-                            href={item.href}
-                            className="hover:underline underline-offset-4 transition-all duration-200"
+                    <nav className="hidden md:flex space-x-6 text-[18px]">
+                        {navItems.map((item) => (
+                            <a
+                                key={item.href}
+                                href={item.href}
+                                className="hover:underline underline-offset-4 transition-all duration-200"
+                            >
+                                {item.label}
+                            </a>
+                        ))}
+                    </nav>
+
+                    <div className="hidden md:flex items-center space-x-4">
+                        <button
+                            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                            className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
+                            aria-label={t('toggleTheme')}
                         >
-                            {item.label}
-                        </a>
-                    ))}
-                </nav>
+                            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                        </button>
 
-                <div className="hidden md:flex items-center space-x-4">
-                    <button
-                        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                        className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                        aria-label={t('toggleTheme')}
-                    >
-                        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                    </button>
+                        <button
+                            onClick={toggleLanguage}
+                            className="flex items-center gap-2 p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
+                            aria-label={t('toggleLanguage')}
+                        >
+                            <ReactCountryFlag
+                                countryCode={language === 'pt' ? 'BR' : 'US'}
+                                svg
+                                style={{ width: '18px', height: '18px' }}
+                            />
+                            <span className="uppercase text-sm font-medium">{language}</span>
+                            <Languages size={18} />
+                        </button>
+                    </div>
 
-                    <button
-                        onClick={toggleLanguage}
-                        className="flex items-center gap-2 p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                        aria-label={t('toggleLanguage')}
-                    >
-                        <ReactCountryFlag
-                            countryCode={language === 'pt' ? 'BR' : 'US'}
-                            svg
-                            style={{ width: '18px', height: '18px' }}
-                        />
-                        <span className="uppercase text-sm font-medium">{language}</span>
-                        <Languages size={18} />
-                    </button>
-                </div>
+                    <div className="flex md:hidden items-center space-x-2">
+                        <button
+                            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                            className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
+                            aria-label={t('toggleTheme')}
+                        >
+                            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                        </button>
 
-                <div className="flex md:hidden items-center space-x-2">
-                    <button
-                        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                        className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                        aria-label={t('toggleTheme')}
-                    >
-                        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                    </button>
-
-                    <button
-                        onClick={toggleMenu}
-                        className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                        aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}
-                    >
-                        {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
-                    </button>
+                        <button
+                            onClick={toggleMenu}
+                            className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
+                            aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}
+                        >
+                            {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
+                        </button>
+                    </div>
                 </div>
             </header>
 
             {isMenuOpen && (
                 <div className="md:hidden bg-(--secundary-background) border-b border-(--border) px-4 py-4">
-                    <nav className="flex flex-col space-y-4">
+                    <nav className="flex flex-col space-y-4 max-w-7xl mx-auto">
                         {navItems.map((item) => (
                             <a
                                 key={item.href}
