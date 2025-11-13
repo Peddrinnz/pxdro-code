@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/custom/theme-provider";
+import { LanguageProvider } from "../contexts/LanguageContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          {children}
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+            {children}
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

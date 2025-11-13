@@ -4,18 +4,20 @@ import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { Sun, Moon, Languages, Menu, X } from 'lucide-react';
 import ReactCountryFlag from "react-country-flag";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Header = () => {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
-    const [language, setLanguage] = useState<'pt' | 'en'>('pt');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { language, setLanguage, t } = useLanguage();
 
     useEffect(() => setMounted(true), []);
     if (!mounted) return null;
 
     const toggleLanguage = () => {
-        setLanguage((prev) => (prev === 'pt' ? 'en' : 'pt'));
+        const newLanguage = language === 'pt' ? 'en' : 'pt';
+        setLanguage(newLanguage);
     };
 
     const toggleMenu = () => {
@@ -23,12 +25,12 @@ const Header = () => {
     };
 
     const navItems = [
-        { href: "#inicio", label: "Início" },
-        { href: "#sobre", label: "Sobre" },
-        { href: "#habilidades", label: "Habilidades" },
-        { href: "#experiencia", label: "Experiência" },
-        { href: "#formacao", label: "Formação" },
-        { href: "#contato", label: "Contato" }
+        { href: "#inicio", label: t('home') },
+        { href: "#sobre", label: t('about') },
+        { href: "#habilidades", label: t('skills') },
+        { href: "#experiencia", label: t('experience') },
+        { href: "#formacao", label: t('education') },
+        { href: "#contato", label: t('contact') }
     ];
 
     return (
@@ -52,7 +54,7 @@ const Header = () => {
                     <button
                         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                         className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                        aria-label="Alternar tema"
+                        aria-label={t('toggleTheme')}
                     >
                         {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
@@ -60,7 +62,7 @@ const Header = () => {
                     <button
                         onClick={toggleLanguage}
                         className="flex items-center gap-2 p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                        aria-label="Trocar idioma"
+                        aria-label={t('toggleLanguage')}
                     >
                         <ReactCountryFlag
                             countryCode={language === 'pt' ? 'BR' : 'US'}
@@ -76,7 +78,7 @@ const Header = () => {
                     <button
                         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                         className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                        aria-label="Alternar tema"
+                        aria-label={t('toggleTheme')}
                     >
                         {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
@@ -84,7 +86,7 @@ const Header = () => {
                     <button
                         onClick={toggleMenu}
                         className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                        aria-label="Abrir menu"
+                        aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}
                     >
                         {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
                     </button>
@@ -108,7 +110,7 @@ const Header = () => {
                         <button
                             onClick={toggleLanguage}
                             className="flex items-center gap-2 p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer w-fit mt-2"
-                            aria-label="Trocar idioma"
+                            aria-label={t('toggleLanguage')}
                         >
                             <ReactCountryFlag
                                 countryCode={language === 'pt' ? 'BR' : 'US'}
