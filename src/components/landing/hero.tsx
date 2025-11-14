@@ -3,6 +3,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight, Download } from 'lucide-react';
 import Image from 'next/image';
+import ParticlesBackground from '../custom/ParticlesBackground';
 
 const Hero = () => {
     const { language } = useLanguage();
@@ -18,7 +19,7 @@ const Hero = () => {
         },
         en: {
             title: "Hello, I'm",
-            name: "Pedro Ernesto", 
+            name: "Pedro Ernesto",
             description: "More than just facilitating tasks, I seek to transform realities through technology.",
             projects: "View projects",
             downloadCV: "Download CV",
@@ -29,8 +30,13 @@ const Hero = () => {
     const content = heroContent[language];
 
     return (
-        <section id="inicio" className="flex items-center bg-(--background) px-4 sm:px-6 lg:px-8 py-16">
-            <div className="max-w-7xl w-full mx-auto">
+        <section
+            id="inicio"
+            className="relative flex items-center bg-(--background) px-4 sm:px-6 lg:px-8 py-16"
+        >
+
+            <ParticlesBackground />
+            <div className="max-w-7xl w-full mx-auto relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     <div className="order-2 lg:order-1">
                         <div className="mb-4 lg:mb-6">
@@ -38,7 +44,7 @@ const Hero = () => {
                                 {content.role}
                             </span>
                         </div>
-                        
+
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-2 lg:mb-4">
                             {content.title}
                         </h1>
@@ -56,18 +62,17 @@ const Hero = () => {
                                 {content.projects}
                                 <ArrowRight size={20} className="inline ml-2" />
                             </button>
-                            
+
                             <button className="flex items-center gap-2 border-2 border-(--border) px-6 py-3 rounded-md font-regular text-lg hover:border-(--hover-color) transition-colors cursor-pointer justify-center w-full sm:w-auto">
                                 <Download size={20} />
                                 {content.downloadCV}
                             </button>
                         </div>
                     </div>
-                    
+
                     <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
                         <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 group">
-                            
-                            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-(--secondary-border)">
+                            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-(--border)">
                                 <Image
                                     src="/me.jpeg"
                                     alt="Pedro Ernesto"
