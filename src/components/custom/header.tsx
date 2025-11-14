@@ -8,21 +8,16 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 const Header = () => {
     const { theme, setTheme } = useTheme();
+    const { language, setLanguage, t } = useLanguage();
+
     const [mounted, setMounted] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { language, setLanguage, t } = useLanguage();
 
     useEffect(() => setMounted(true), []);
     if (!mounted) return null;
 
-    const toggleLanguage = () => {
-        const newLanguage = language === 'pt' ? 'en' : 'pt';
-        setLanguage(newLanguage);
-    };
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+    const toggleLanguage = () =>
+        setLanguage(language === 'pt' ? 'en' : 'pt');
 
     const navItems = [
         { href: "#inicio", label: t('home') },
@@ -35,9 +30,12 @@ const Header = () => {
 
     return (
         <>
-            <header className="bg-(--secundary-background) px-4 sm:px-6 lg:px-8 py-6 border-b border-(--border) relative">
+            <header className="fixed top-0 left-0 w-full z-50 bg-(--secundary-background) border-b border-(--border) px-4 sm:px-6 lg:px-8 py-4">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
-                    <h1 className="text-xl sm:text-2xl font-semibold">{'{ Pxdro Code }'}</h1>
+                    
+                    <h1 className="text-xl sm:text-2xl font-semibold">
+                        {'{ Pxdro Code }'}
+                    </h1>
 
                     <nav className="hidden md:flex space-x-6 text-[18px]">
                         {navItems.map((item) => (
@@ -54,16 +52,14 @@ const Header = () => {
                     <div className="hidden md:flex items-center space-x-4">
                         <button
                             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                            className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                            aria-label={t('toggleTheme')}
+                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer"
                         >
                             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
 
                         <button
                             onClick={toggleLanguage}
-                            className="flex items-center gap-2 p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                            aria-label={t('toggleLanguage')}
+                            className="flex items-center gap-2 p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer"
                         >
                             <ReactCountryFlag
                                 countryCode={language === 'pt' ? 'BR' : 'US'}
@@ -78,16 +74,14 @@ const Header = () => {
                     <div className="flex md:hidden items-center space-x-2">
                         <button
                             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                            className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                            aria-label={t('toggleTheme')}
+                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color)"
                         >
                             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
 
                         <button
-                            onClick={toggleMenu}
-                            className="p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer"
-                            aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color)"
                         >
                             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
                         </button>
@@ -103,16 +97,15 @@ const Header = () => {
                                 key={item.href}
                                 href={item.href}
                                 onClick={() => setIsMenuOpen(false)}
-                                className="hover:underline underline-offset-4 transition-all duration-200 py-2 text-lg"
+                                className="py-2 text-lg hover:underline underline-offset-4"
                             >
                                 {item.label}
                             </a>
                         ))}
-                        
+
                         <button
                             onClick={toggleLanguage}
-                            className="flex items-center gap-2 p-2 hover:bg-(--hover-color) transition bg-(--background) border border-(--border) rounded-md cursor-pointer w-fit mt-2"
-                            aria-label={t('toggleLanguage')}
+                            className="flex items-center gap-2 p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) w-fit"
                         >
                             <ReactCountryFlag
                                 countryCode={language === 'pt' ? 'BR' : 'US'}
