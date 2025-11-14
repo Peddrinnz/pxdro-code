@@ -34,55 +34,89 @@ const Header = () => {
         };
     }, []);
 
-    if (!mounted) return null;
+    const scrollToSection = (sectionId: string, subSection?: string) => {
+        if (subSection === 'formacao') {
+            const experienceSection = document.getElementById('experiencia');
+            if (experienceSection) {
+                const timelineItems = experienceSection.querySelectorAll('.timeline-item');
+                if (timelineItems.length >= 3) {
+                    const formacaoItem = timelineItems[2]; 
+                    const offsetTop = formacaoItem.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                    setIsMenuOpen(false);
+                    return;
+                }
+            }
+        }
+        
+        const element = document.getElementById(sectionId);
+        if (element) {
+            const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+            setIsMenuOpen(false);
+        }
+    };
 
     const toggleLanguage = () =>
         setLanguage(language === 'pt' ? 'en' : 'pt');
 
     const navItems = [
-        { href: "#inicio", label: t('home') },
-        { href: "#sobre", label: t('about') },
-        { href: "#habilidades", label: t('skills') },
-        { href: "#experiencia", label: t('experience') },
-        { href: "#formacao", label: t('education') },
-        { href: "#contato", label: t('contact') }
+        { id: "inicio", label: t('home') },
+        { id: "sobre", label: t('about') },
+        { id: "habilidades", label: t('skills') },
+        { id: "experiencia", label: t('experience') },
+        { id: "experiencia", label: t('education'), subSection: 'formacao' },
+        { id: "contato", label: t('contact') }
     ];
+
+    if (!mounted) return null;
 
     return (
         <>
             <header
                 ref={headerRef}
-                className="fixed top-0 left-0 w-full z-50 bg-(--secundary-background) border-b border-(--border) px-4 sm:px-6 lg:px-8 py-4"
+                className="fixed top-0 left-0 w-full z-50 bg-(--secundary-background) border-b border-(--border) px-4 sm:px-6 lg:px-8 py-4 opacity-90"
             >
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     
-                    <h1 className="text-xl sm:text-2xl font-semibold">
+                    <h1 
+                        className="text-xl sm:text-2xl font-semibold cursor-pointer hover:opacity-80 transition-opacity" 
+                        onClick={() => scrollToSection('inicio')}
+                    >
                         {'{ Pxdro Code }'}
                     </h1>
 
                     <nav className="hidden md:flex space-x-6 text-[18px]">
                         {navItems.map((item) => (
-                            <a
-                                key={item.href}
-                                href={item.href}
-                                className="hover:underline underline-offset-4 transition-all duration-200"
+                            <button
+                                key={item.label}
+                                onClick={() => scrollToSection(item.id, item.subSection)}
+                                className="hover:underline underline-offset-4 transition-all duration-200 cursor-pointer hover:text-(--primary-color)"
                             >
                                 {item.label}
-                            </a>
+                            </button>
                         ))}
                     </nav>
 
                     <div className="hidden md:flex items-center space-x-4">
                         <button
                             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer"
+                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer transition-colors"
+                            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                         >
                             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
 
                         <button
                             onClick={toggleLanguage}
-                            className="flex items-center gap-2 p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer"
+                            className="flex items-center gap-2 p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer transition-colors"
+                            aria-label={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
                         >
                             <ReactCountryFlag
                                 countryCode={language === 'pt' ? 'BR' : 'US'}
@@ -97,15 +131,17 @@ const Header = () => {
                     <div className="flex md:hidden items-center space-x-2">
                         <button
                             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color)"
+                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer transition-colors"
+                            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                         >
                             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
 
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color)"
+                            className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer transition-colors"
                             aria-expanded={isMenuOpen}
+                            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                         >
                             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
                         </button>
@@ -115,24 +151,23 @@ const Header = () => {
 
             {isMenuOpen && (
                 <div
-                    className="md:hidden fixed left-0 w-full z-40 bg-(--secundary-background) border-b border-(--border) px-4 py-4"
+                    className="md:hidden fixed left-0 w-full z-40 bg-(--secundary-background) border-b border-(--border) px-4 py-4 opacity-95"
                     style={{ top: headerHeight }}
                 >
                     <nav className="flex flex-col space-y-4 max-w-7xl mx-auto">
                         {navItems.map((item) => (
-                            <a
-                                key={item.href}
-                                href={item.href}
-                                onClick={() => setIsMenuOpen(false)}
-                                className="py-2 text-lg hover:underline underline-offset-4"
+                            <button
+                                key={item.label}
+                                onClick={() => scrollToSection(item.id, item.subSection)}
+                                className="py-2 text-lg hover:underline underline-offset-4 text-left cursor-pointer hover:text-(--primary-color) transition-colors"
                             >
                                 {item.label}
-                            </a>
+                            </button>
                         ))}
 
                         <button
                             onClick={toggleLanguage}
-                            className="flex items-center gap-2 p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) w-fit"
+                            className="flex items-center gap-2 p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) w-fit cursor-pointer transition-colors mt-2"
                         >
                             <ReactCountryFlag
                                 countryCode={language === 'pt' ? 'BR' : 'US'}

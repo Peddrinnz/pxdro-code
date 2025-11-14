@@ -39,26 +39,26 @@ const About = () => {
                     <span className="block w-32 h-0.5 bg-(--text) mx-auto mt-2"></span>
                 </h2>
 
-                <div className="bg-(--cards) shadow-md rounded-md p-8 mb-12 flex flex-col lg:flex-row justify-between items-center gap-10 border border-(--border)">    
+                <div className="bg-(--cards) shadow-md rounded-md p-8 mb-12 flex flex-col lg:flex-row justify-between items-center gap-10 border border-(--border) hover:shadow-lg hover:border-(--secundary-border) transition-all duration-300">    
                     <p className="text-lg text-(--secondary-text) leading-relaxed max-w-3xl">
                         {content.birth}
                     </p>
 
                     <div className="flex flex-col items-center gap-8">
-                        <div className="bg-(--background) backdrop-blur-md shadow rounded-md px-10 py-6 text-center border border-(--border)">
-                            <div className="text-4xl font-semibold text-(--primary-color)">2+</div>
-                            <div className="text-lg mt-1">{content.years}</div>
+                        <div className="bg-(--background) backdrop-blur-md shadow rounded-md px-10 py-6 text-center border border-(--border) hover:shadow-lg hover:border-(--secundary-border) hover:scale-105 transition-all duration-300 group cursor-pointer">
+                            <div className="text-4xl font-semibold text-(--primary-color) group-hover:scale-110 transition-transform duration-300">2+</div>
+                            <div className="text-lg mt-1 group-hover:text-(--primary-color) transition-colors duration-300">{content.years}</div>
                         </div>
 
-                        <div className="bg-(--background) backdrop-blur-md shadow rounded-md px-10 py-6 text-center border border-(--border)">
-                            <div className="text-4xl font-semibold text-(--primary-color)">4+</div>
-                            <div className="text-lg mt-1">{content.projects}</div>
+                        <div className="bg-(--background) backdrop-blur-md shadow rounded-md px-10 py-6 text-center border border-(--border) hover:shadow-lg hover:border-(--secundary-border) hover:scale-105 transition-all duration-300 group cursor-pointer">
+                            <div className="text-4xl font-semibold text-(--primary-color) group-hover:scale-110 transition-transform duration-300">4+</div>
+                            <div className="text-lg mt-1 group-hover:text-(--primary-color) transition-colors duration-300">{content.projects}</div>
                         </div>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border)">
+                    <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border) hover:shadow-lg hover:border-(--secundary-border) hover:scale-105 transition-all duration-300">
                         <h3 className="text-2xl font-semibold mb-4">
                             {content.frontendTitle}
                         </h3>
@@ -67,7 +67,7 @@ const About = () => {
                         </p>
                     </div>
 
-                    <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border)">
+                    <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border) hover:shadow-lg hover:border-(--secundary-border) hover:scale-105 transition-all duration-300">
                         <h3 className="text-2xl font-semibold mb-4">
                             {content.fullstackTitle}
                         </h3>
