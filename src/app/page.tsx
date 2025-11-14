@@ -1,4 +1,5 @@
 import Header from "@/components/custom/header";
+import About from "@/components/landing/about";
 import Hero from "@/components/landing/hero";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
       <main>
         <Header />
         <Hero />
+        <About />
         <div>
           <h1 className="text-3xl font-bold underline">
             Hello
