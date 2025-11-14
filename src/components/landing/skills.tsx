@@ -11,7 +11,6 @@ import {
     Container,
     Palette
 } from 'lucide-react';
-import ParticlesBackground from '../custom/ParticlesBackground';
 
 const Skills = () => {
     const { language } = useLanguage();
@@ -69,7 +68,6 @@ const Skills = () => {
             id="habilidades"
             className="relative z-0 flex items-center bg-(--background) px-4 sm:px-6 lg:px-8 py-16"
         >
-            <ParticlesBackground />
             <div className="max-w-7xl w-full mx-auto relative z-10">
                 <h2 className="text-3xl font-semibold text-center mb-12 relative inline-block left-1/2 -translate-x-1/2">
                     {content.title}
