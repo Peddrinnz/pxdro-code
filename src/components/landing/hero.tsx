@@ -32,7 +32,7 @@ const Hero = () => {
     return (
         <section
             id="inicio"
-            className="relative flex items-center bg-(--background) px-4 sm:px-6 lg:px-8 py-16 mt-20"
+            className="relative z-0 flex items-center bg-(--background) px-4 sm:px-6 lg:px-8 py-16 mt-20"
         >
 
             <ParticlesBackground />

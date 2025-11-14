@@ -1,6 +1,7 @@
 import Header from "@/components/custom/header";
 import About from "@/components/landing/about";
 import Hero from "@/components/landing/hero";
+import Skills from "@/components/landing/skills";
 
 export default function Home() {
   return (
@@ -9,11 +10,7 @@ export default function Home() {
         <Header />
         <Hero />
         <About />
-        <div>
-          <h1 className="text-3xl font-bold underline">
-            Hello
-          </h1>
-        </div>
+        <Skills />
       </main>
     </div>
   );

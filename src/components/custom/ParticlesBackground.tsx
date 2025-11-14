@@ -24,7 +24,7 @@ export default function ParticlesBackground() {
                 number: { value: 40 },
                 color: { value: "#3b82f6" },
                 shape: { type: "circle" },
-                size: { value: { min: 1, max: 4 } },
+                size: { value: { min: 1, max: 6 } },
                 links: {
                     enable: true,
                     distance: 150,
@@ -32,7 +32,7 @@ export default function ParticlesBackground() {
                     opacity: 0.3,
                     width: 1,
                 },
-                move: { enable: true, speed: 1 },
+                move: { enable: true, speed: 2 },
             },
         }),
         []
@@ -44,7 +44,7 @@ export default function ParticlesBackground() {
         <Particles
             id="tsparticles"
             options={options}
-            className="absolute inset-0 w-full h-full pointer-events-none"
+            className="absolute inset-0 w-full h-full pointer-events-none z-[-1]"
         />
     );
 }

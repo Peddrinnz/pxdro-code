@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Sun, Moon, Languages, Menu, X } from 'lucide-react';
 import ReactCountryFlag from "react-country-flag";
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -12,8 +12,28 @@ const Header = () => {
 
     const [mounted, setMounted] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [headerHeight, setHeaderHeight] = useState(0);
+
+    const headerRef = useRef<HTMLElement | null>(null);
 
     useEffect(() => setMounted(true), []);
+    useEffect(() => {
+        const measure = () => {
+            if (headerRef.current) {
+                const rect = headerRef.current.getBoundingClientRect();
+                setHeaderHeight(Math.ceil(rect.height));
+            }
+        };
+        measure();
+        window.addEventListener('resize', measure);
+        const ro = new ResizeObserver(measure);
+        if (headerRef.current) ro.observe(headerRef.current);
+        return () => {
+            window.removeEventListener('resize', measure);
+            ro.disconnect();
+        };
+    }, []);
+
     if (!mounted) return null;
 
     const toggleLanguage = () =>
@@ -30,7 +50,10 @@ const Header = () => {
 
     return (
         <>
-            <header className="fixed top-0 left-0 w-full z-50 bg-(--secundary-background) border-b border-(--border) px-4 sm:px-6 lg:px-8 py-4">
+            <header
+                ref={headerRef}
+                className="fixed top-0 left-0 w-full z-50 bg-(--secundary-background) border-b border-(--border) px-4 sm:px-6 lg:px-8 py-4"
+            >
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     
                     <h1 className="text-xl sm:text-2xl font-semibold">
@@ -82,6 +105,7 @@ const Header = () => {
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className="p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color)"
+                            aria-expanded={isMenuOpen}
                         >
                             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
                         </button>
@@ -90,7 +114,10 @@ const Header = () => {
             </header>
 
             {isMenuOpen && (
-                <div className="md:hidden bg-(--secundary-background) border-b border-(--border) px-4 py-4">
+                <div
+                    className="md:hidden fixed left-0 w-full z-40 bg-(--secundary-background) border-b border-(--border) px-4 py-4"
+                    style={{ top: headerHeight }}
+                >
                     <nav className="flex flex-col space-y-4 max-w-7xl mx-auto">
                         {navItems.map((item) => (
                             <a
