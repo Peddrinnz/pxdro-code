@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight, Download } from 'lucide-react';
 import Image from 'next/image';
 import ParticlesBackground from '../custom/ParticlesBackground';
+import Link from "next/link";
 
 const Hero = () => {
     const { language } = useLanguage();
@@ -58,10 +59,13 @@ const Hero = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <button className="bg-(--button) px-6 py-3 rounded-md font-regular text-md hover:bg-(--hover-button) transition-colors border border-(--secondary-border) cursor-pointer flex items-center justify-center w-full sm:w-auto">
+                            <Link
+                                href="/projects"
+                                className="bg-(--button) px-6 py-3 rounded-md font-regular text-md hover:bg-(--hover-button) transition-colors border border-(--secondary-border) cursor-pointer flex items-center justify-center w-full sm:w-auto"
+                            >
                                 {content.projects}
                                 <ArrowRight size={20} className="inline ml-2" />
-                            </button>
+                            </Link>
 
                             <a
                                 href="/cv.pdf"
