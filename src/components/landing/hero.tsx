@@ -63,10 +63,14 @@ const Hero = () => {
                                 <ArrowRight size={20} className="inline ml-2" />
                             </button>
 
-                            <button className="flex items-center gap-2 border-2 border-(--border) px-6 py-3 rounded-md font-regular text-lg hover:border-(--hover-color) transition-colors cursor-pointer justify-center w-full sm:w-auto">
+                            <a
+                                href="/cv.pdf"
+                                download="Pedro-Ernesto-CV.pdf"
+                                className="flex items-center gap-2 border-2 border-(--border) px-6 py-3 rounded-md font-regular text-lg hover:border-(--hover-color) transition-colors cursor-pointer justify-center w-full sm:w-auto"
+                            >
                                 <Download size={20} />
                                 {content.downloadCV}
-                            </button>
+                            </a>
                         </div>
                     </div>
 
