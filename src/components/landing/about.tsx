@@ -39,7 +39,7 @@ const About = () => {
                     <span className="block w-32 h-0.5 bg-(--text) mx-auto mt-2"></span>
                 </h2>
 
-                <div className="bg-(--cards) shadow-md rounded-md p-8 mb-12 flex flex-col lg:flex-row justify-between items-center gap-10 border border-(--border) hover:shadow-lg hover:border-(--secundary-border) transition-all duration-300">    
+                <div className="bg-(--cards) shadow-md rounded-md p-8 mb-12 flex flex-col lg:flex-row justify-between items-center gap-10 border border-(--border) hover:border-(--secundary-border)">    
                     <p className="text-lg text-(--secondary-text) leading-relaxed max-w-3xl">
                         {content.birth}
                     </p>
@@ -58,7 +58,7 @@ const About = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border) hover:shadow-lg hover:border-(--secundary-border) hover:scale-105 transition-all duration-300">
+                    <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border) hover:shadow-lg hover:border-(--secundary-border)">
                         <h3 className="text-2xl font-semibold mb-4">
                             {content.frontendTitle}
                         </h3>
@@ -67,7 +67,7 @@ const About = () => {
                         </p>
                     </div>
 
-                    <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border) hover:shadow-lg hover:border-(--secundary-border) hover:scale-105 transition-all duration-300">
+                    <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border) hover:shadow-lg hover:border-(--secundary-border)">
                         <h3 className="text-2xl font-semibold mb-4">
                             {content.fullstackTitle}
                         </h3>
