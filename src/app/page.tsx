@@ -4,6 +4,7 @@ import Hero from "@/components/landing/hero";
 import Skills from "@/components/landing/skills";
 import Experience from "@/components/landing/experience";
 import Contact from "@/components/landing/contact";
+import Footer from "@/components/custom/footer";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Skills />
         <Experience />
         <Contact />
+        <Footer />
       </main>
     </div>
   );

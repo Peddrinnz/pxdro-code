@@ -50,7 +50,7 @@ const Contact = () => {
     };
 
     return (
-        <section id="contato" className="bg-(--background) px-4 sm:px-6 lg:px-8 py-20">
+        <section id="contato" className="bg-(--background) px-4 sm:px-6 lg:px-8 py-20 ">
             <div className="max-w-5xl mx-auto">
 
                 <h2 className="text-3xl font-semibold text-center mb-12 relative inline-block left-1/2 -translate-x-1/2">

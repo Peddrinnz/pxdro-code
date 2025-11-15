@@ -143,7 +143,7 @@ const Experience = () => {
 
     const TimelineItem = ({ data, index }: { data: any; index: number }) => (
         <div className={`flex items-start relative ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} mb-12`}>
-            <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+            <div className={`w-full lg:w-5/12 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
                 <div className="bg-(--cards) shadow-md rounded-md p-8 border border-(--border) hover:shadow-lg hover:border-(--secundary-border) transition-all duration-300 group-hover:scale-105">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
                         <div className="flex-1">
@@ -184,11 +184,11 @@ const Experience = () => {
                 </div>
             </div>
 
-            <div className="hidden md:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 w-12 h-full">
+            <div className="hidden lg:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 w-12 h-full">
                 <div className="w-5 h-5 bg-(--background) rounded-full border-4 border-(--primary-color) z-10 relative group-hover:scale-125 transition-transform duration-300"></div>
             </div>
 
-            <div className="hidden md:block w-5/12"></div>
+            <div className="hidden lg:block w-5/12"></div>
         </div>
     );
 

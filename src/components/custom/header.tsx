@@ -81,7 +81,7 @@ const Header = () => {
         <>
             <header
                 ref={headerRef}
-                className="fixed top-0 left-0 w-full z-50 bg-(--secundary-background) border-b border-(--border) px-4 sm:px-6 lg:px-8 py-4 opacity-90"
+                className="fixed top-0 left-0 w-full z-50 bg-(--secundary-background) border-b border-(--border) px-4 sm:px-6 lg:px-8 py-4 opacity-80"
             >
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     
