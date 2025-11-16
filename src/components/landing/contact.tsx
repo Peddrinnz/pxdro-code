@@ -44,9 +44,33 @@ const Contact = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Form enviado:", formData);
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (!res.ok) {
+                alert(language === "pt" ? "Erro ao enviar mensagem." : "Failed to send message.");
+                return;
+            }
+
+            alert(language === "pt" ? "Mensagem enviada!" : "Message sent!");
+
+            setFormData({
+                name: "",
+                email: "",
+                message: ""
+            });
+
+        } catch (error) {
+            console.error(error);
+            alert(language === "pt" ? "Erro inesperado." : "Unexpected error.");
+        }
     };
 
     return (
