@@ -3,10 +3,12 @@
 import Image from "next/image";
 import { ArrowRight, Github, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Link from "next/link";
+
 import kdeImg from "../../../public/kde.svg";
 import embrapaImg from "../../../public/empraba.png";
 import javaImg from "../../../public/java.png";
-import petImg from "../../../public/studiopetcare.svg"
+import petImg from "../../../public/studiopetcare.svg";
 import { useEffect, useState } from "react";
 import ParticlesBackground from "../custom/ParticlesBackground";
 
@@ -21,6 +23,7 @@ const Projects = () => {
 
     const projects = [
         {
+            slug: "kde",
             name: "Projeto KDÊ",
             description:
                 language === "pt"
@@ -31,6 +34,7 @@ const Projects = () => {
             github: "https://github.com/Peddrinnz/tcc",
         },
         {
+            slug: "siginf",
             name: "Projeto SIGINF",
             description:
                 language === "pt"
@@ -41,21 +45,23 @@ const Projects = () => {
             github: "https://github.com/Peddrinnz/siginf",
         },
         {
+            slug: "java-ui",
             name: "Projeto Java UI",
             description:
                 language === "pt"
-                    ? "Sistema de Gestão de Biblioteca desenvolvido em Java utilizando o padrão MVC com a variação MVCR. Permite cadastrar livros e usuários, além de realizar empréstimos e devoluções com controle de datas e validações. O projeto inclui interface gráfica em Java Swing, organização modular e regras de negócio bem definidas."
-                    : "Library Management System developed in Java using the MVC pattern with the MVCR variation. It allows registering books and users, as well as handling loans and returns with date tracking and validations. The project includes a Java Swing user interface, modular structure, and well-defined business rules.",
+                    ? "Sistema de Gestão de Biblioteca desenvolvido em Java utilizando o padrão MVC com a variação MVCR. Permite cadastrar livros e usuários, além de realizar empréstimos e devoluções com controle de datas e validações."
+                    : "Library Management System developed in Java using the MVC pattern with the MVCR variation. It allows registering books and users, as well as handling loans and returns with validations.",
             tags: ["Spring Boot", "Java Swing", "Java", "Docker", "Figma"],
             image: javaImg,
             github: "https://github.com/Peddrinnz/java_ui",
         },
         {
+            slug: "studio-pet-care",
             name: "Studio Pet Care",
             description:
                 language === "pt"
-                    ? "Landing page desenvolvida para o Studio Pet Care, com foco na apresentação de serviços voltados a cuidados de pets. Todo o design UI/UX foi criado por mim no Figma, incluindo identidade visual, layout e organização dos componentes."
-                    : "Landing page developed for Studio Pet Care, focused on showcasing pet care services. The entire UI/UX design was created by me in Figma, including visual identity, layout, and component organization.",
+                    ? "Landing page desenvolvida para o Studio Pet Care, com design UI/UX criado totalmente no Figma, incluindo identidade visual e estrutura completa."
+                    : "Landing page developed for Studio Pet Care, with UI/UX fully designed in Figma, including visual identity and layout.",
             tags: ["React", "Tailwind CSS", "Figma", "TypeScript"],
             image: petImg,
             github: "https://github.com/Peddrinnz/Studio-Pet-Care",
@@ -160,11 +166,13 @@ const Projects = () => {
                                     </div>
 
                                     <div className="flex flex-col sm:flex-row items-center gap-3 mt-auto pt-4">
-                                        <button className="flex items-center gap-2 px-4 py-2 bg-(--button)
-                                            rounded-md hover:bg-(--hover-button) border border-(--secondary-border)">
-                                            {content.details}
-                                            <ArrowRight size={18} />
-                                        </button>
+                                        <Link href={`/projects/${project.slug}`}>
+                                            <button className="flex items-center gap-2 px-4 py-2 bg-(--button)
+                                                rounded-md hover:bg-(--hover-button) border border-(--secondary-border)">
+                                                {content.details}
+                                                <ArrowRight size={18} />
+                                            </button>
+                                        </Link>
 
                                         <a href={project.github} target="_blank"
                                             className="flex items-center gap-2 px-4 py-2 bg-(--background)
