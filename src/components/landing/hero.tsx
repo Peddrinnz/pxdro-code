@@ -5,6 +5,7 @@ import { ArrowRight, Download } from 'lucide-react';
 import Image from 'next/image';
 import ParticlesBackground from '../custom/ParticlesBackground';
 import Link from "next/link";
+import Typewriter from '@/components/custom/TypeWriter';
 
 const Hero = () => {
     const { language } = useLanguage();
@@ -16,7 +17,6 @@ const Hero = () => {
             description: "Mais do que facilitar tarefas, busco transformar realidades por meio da tecnologia.",
             projects: "Ver projetos",
             downloadCV: "Baixar CV",
-            role: "Desenvolvedor Front-End"
         },
         en: {
             title: "Hello, I'm",
@@ -24,25 +24,28 @@ const Hero = () => {
             description: "More than just facilitating tasks, I seek to transform realities through technology.",
             projects: "View projects",
             downloadCV: "Download CV",
-            role: "Front-End Developer"
         }
     };
 
     const content = heroContent[language];
 
+    const roles = language === "pt"
+        ? ["Designer UI/UX", "Desenvolvedor Front-end", "Experiência em Back-end"]
+        : ["UI/UX Designer", "Front-End Developer", "Back-end Experience"];
+
     return (
         <section
             id="inicio"
-            className="relative z-0 flex items-center bg-(--background) px-4 sm:px-6 lg:px-8 py-16 mt-20"
+            className="relative z-10 flex items-center bg-(--background) px-4 sm:px-6 lg:px-8 py-16 mt-20"
         >
-
             <ParticlesBackground />
-            <div className="max-w-7xl w-full mx-auto relative z-10">
+
+            <div className="max-w-7xl w-full mx-auto relative z-50">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     <div className="order-2 lg:order-1">
                         <div className="mb-4 lg:mb-6">
                             <span className="text-lg sm:text-xl font-semibold bg-linear-to-r from-(--primary-color) to-blue-500 bg-clip-text text-transparent">
-                                {content.role}
+                                <Typewriter words={roles} />
                             </span>
                         </div>
 
@@ -91,6 +94,7 @@ const Hero = () => {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
