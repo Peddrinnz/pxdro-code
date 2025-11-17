@@ -1,5 +1,6 @@
-import projects from "../../data/projectsData";
-import Image from "next/image";
+import Footer from "@/components/custom/footer";
+import Header from "@/components/custom/header";
+import Details from "@/components/details/details";
 
 interface ProjectPageProps {
     params: {
@@ -7,42 +8,39 @@ interface ProjectPageProps {
     };
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-    const project = projects.find(p => p.slug === params.slug);
-
-    if (!project) return <div className="mt-20 text-center">Projeto não encontrado.</div>;
-
+export default function Page({ params }: ProjectPageProps) {
     return (
-        <section className="max-w-4xl mx-auto py-20 px-4">
-            <h1 className="text-4xl font-bold mb-6">{project.name}</h1>
-
-            <Image
-                src={project.image}
-                alt={project.name}
-                className="w-full max-h-80 object-contain mb-6"
-            />
-
-            <p className="text-lg text-(--secondary-text) mb-6">
-                {project.description}
-            </p>
-
-            <h2 className="text-xl font-semibold mb-3">Tecnologias utilizadas</h2>
-
-            <div className="flex flex-wrap gap-3 mb-6">
-                {project.tags.map((tag, i) => (
-                    <span key={i} className="px-3 py-1 bg-(--background) border rounded-md text-sm">
-                        {tag}
-                    </span>
-                ))}
-            </div>
-
-            <a
-                href={project.github}
-                target="_blank"
-                className="px-4 py-2 bg-(--button) border rounded-md hover:bg-(--hover-button)"
-            >
-                Ver no GitHub
-            </a>
-        </section>
+        <div>
+            <Header />
+            <Details />
+            <Footer />
+        </div>
     );
+}
+
+export async function generateMetadata({ params }: ProjectPageProps) {
+    const { slug } = await params;
+    
+    const projects = [
+        { slug: "kde", name: "Projeto KDÊ", description: "Sistema Web desenvolvido para auxiliar o processo de inventário de bens patrimoniais do IFMS" },
+        { slug: "siginf", name: "Projeto SIGINF", description: "Responsável pela atualização completa da interface do SIGINF" },
+        { slug: "java-ui", name: "Projeto Java UI", description: "Sistema de Gestão de Biblioteca desenvolvido em Java" },
+        { slug: "studio-pet-care", name: "Studio Pet Care", description: "Landing page desenvolvida para o Studio Pet Care" },
+    ];
+    
+    const project = projects.find(p => p.slug === slug);
+    
+    return {
+        title: project ? `${project.name} - Pedro Ernesto` : "Projeto Não Encontrado",
+        description: project?.description,
+    };
+}
+
+export async function generateStaticParams() {
+    return [
+        { slug: "kde" },
+        { slug: "siginf" },
+        { slug: "java-ui" },
+        { slug: "studio-pet-care" },
+    ];
 }
