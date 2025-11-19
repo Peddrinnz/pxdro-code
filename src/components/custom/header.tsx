@@ -67,6 +67,8 @@ const Header = () => {
 
     const pathname = usePathname();
     const isProjectsPage = pathname === "/projects";
+    const isProjectDetailsPage = pathname?.startsWith("/projects/") && pathname !== "/projects";
+    const isProjectsOrDetails = isProjectsPage || isProjectDetailsPage;
 
     const toggleLanguage = () =>
         setLanguage(language === 'pt' ? 'en' : 'pt');
@@ -97,7 +99,15 @@ const Header = () => {
                             className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity cursor-pointer"
                         >
                             <ArrowLeft size={20} />
-                            {language === 'pt' ? 'Voltar para Home' : 'Back to Home'}
+                            {language === 'pt' ? 'Voltar para o Início' : 'Back to Home'}
+                        </Link>
+                    ) : isProjectDetailsPage ? (
+                        <Link
+                            href="/projects"
+                            className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity cursor-pointer"
+                        >
+                            <ArrowLeft size={20} />
+                            {language === 'pt' ? 'Voltar para Projetos' : 'Back to Projects'}
                         </Link>
                     ) : (
                         <h1
@@ -108,7 +118,7 @@ const Header = () => {
                         </h1>
                     )}
 
-                    {!isProjectsPage && (
+                    {!isProjectsOrDetails && (
                         <nav className="hidden md:flex space-x-6 text-[18px]">
                             {navItems.map((item) => (
                                 <button
@@ -152,7 +162,7 @@ const Header = () => {
                             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
 
-                        {isProjectsPage ? (
+                        {isProjectsOrDetails ? (
                             <button
                                 onClick={toggleLanguage}
                                 className="flex items-center gap-2 p-2 bg-(--background) border border-(--border) rounded-md hover:bg-(--hover-color) cursor-pointer transition-colors"
@@ -188,7 +198,7 @@ const Header = () => {
                 </div>
             </header>
 
-            {!isProjectsPage && isMenuOpen && (
+            {!isProjectsOrDetails && isMenuOpen && (
                 <div
                     className="md:hidden fixed left-0 w-full z-40 bg-(--secundary-background) border-b border-(--border) px-4 py-4 opacity-95"
                     style={{ top: headerHeight }}

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { Github, Calendar, Target, CheckCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -8,166 +8,352 @@ import kdeImg from "../../../public/kde.svg";
 import embrapaImg from "../../../public/empraba.png";
 import javaImg from "../../../public/java.png";
 import petImg from "../../../public/studiopetcare.svg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const projects = [
+type Lang = "pt" | "en";
+
+type DevelopmentStep = { title: string; description: string };
+
+type LocalizedProject = {
+    name: string;
+    description: string;
+    fullDescription: string;
+    features: string[];
+    developmentProcess: DevelopmentStep[];
+    tags: string[];
+    image: StaticImageData;
+    github: string;
+    timeline: string;
+    team: string;
+    client: string;
+    status: string;
+};
+
+type Project = {
+    slug: string;
+    pt: LocalizedProject;
+    en: LocalizedProject;
+};
+
+export const projects: Project[] = [
     {
         slug: "kde",
-        name: "Projeto KDÊ",
-        description: "Sistema Web desenvolvido para auxiliar o processo de inventário de bens patrimoniais do IFMS e promover mais agilidade no registro de bens.",
-        fullDescription: "Sistema Web desenvolvido para auxiliar o processo de inventário de bens patrimoniais do IFMS e promover mais agilidade no registro de bens. Centralizando em único sistema sendo multi campus a demanda disse o sistema possui interface intuitiva que promove uma boa usabilidade.",
-        features: [
-            "Interface intuitiva com dashboard para os níveis de usuários",
-            "Interface responsiva para dispositivos móveis",
-            "Atualização dos dados em tempo real",
-            "Sessão estatística",
-            "Histórico de mudanças dos bens"
-        ],
-        developmentProcess: [
-            {
-                title: "Pesquisa e fundamentação teórica",
-                description: "Pesquisas e entrevistas para saber as necessidades dos usuários do sistema, funcionalidades e outras necessidades do sistema, além de aprofundar em pesquisas de uma fundamentação teórica."
-            },
-            {
-                title: "Design e UI/UX",
-                description: "Criação de uma interface amigável e acessível, considerando diferentes perfis de usuários."
-            },
-            {
-                title: "Desenvolvimento com Next JS",
-                description: "Front-end em React, Tailwind CSS e componentes reutilizáveis. Back-end em TypeScript e integração com o banco de dados por meio de PostgreSQL."
-            },
-            {
-                title: "Teste com usuários",
-                description: "Validação com usuários reais e profissionais da área de desenvolvimento de sistemas."
-            }
-        ],
-        tags: ["Next JS", "Tailwind CSS", "TypeScript", "PostgreSQL", "Figma"],
-        image: kdeImg,
-        github: "https://github.com/Peddrinnz/tcc",
-        timeline: "6 meses",
-        team: "3 desenvolvedores",
-        client: "IFMS Campus Corumbá (sendo multi campus)",
-        status: "Concluído"
+        pt: {
+            name: "Projeto KDÊ",
+            description: "Sistema Web desenvolvido para auxiliar o processo de inventário de bens patrimoniais do IFMS e promover mais agilidade no registro de bens.",
+            fullDescription: "Sistema Web desenvolvido para auxiliar o processo de inventário de bens patrimoniais do IFMS. Centralizando em um único sistema multicampi, a ferramenta possui interface intuitiva que facilita a usabilidade.",
+            features: [
+                "Interface intuitiva com dashboard para diferentes níveis de usuários",
+                "Interface responsiva para dispositivos móveis",
+                "Atualização dos dados em tempo real",
+                "Sessão estatística integrada",
+                "Histórico de mudanças dos bens"
+            ],
+            developmentProcess: [
+                {
+                    title: "Pesquisa e fundamentação teórica",
+                    description: "Pesquisas e entrevistas para entender necessidades, funcionalidades e demais requisitos do sistema."
+                },
+                {
+                    title: "Design e UI/UX",
+                    description: "Criação de uma interface amigável e acessível para perfis de usuários variados."
+                },
+                {
+                    title: "Desenvolvimento com Next JS",
+                    description: "Front-end com React, Tailwind e componentes reutilizáveis. Back-end em TypeScript com PostgreSQL."
+                },
+                {
+                    title: "Teste com usuários",
+                    description: "Validação com usuários reais e profissionais da área."
+                }
+            ],
+            tags: ["Next JS", "Tailwind CSS", "TypeScript", "PostgreSQL", "Figma"],
+            image: kdeImg,
+            github: "https://github.com/Peddrinnz/tcc",
+            timeline: "6 meses",
+            team: "3 desenvolvedores",
+            client: "IFMS Campus Corumbá (multicampi)",
+            status: "Concluído"
+        },
+        en: {
+            name: "KDÊ Project",
+            description: "Web system developed to support the IFMS asset inventory process and speed up the registration of goods.",
+            fullDescription: "Web system created to support the IFMS asset inventory process. Centralized in a single multicampus system, it offers an intuitive interface that improves usability.",
+            features: [
+                "Intuitive dashboard for different user roles",
+                "Responsive interface for mobile devices",
+                "Real-time data updates",
+                "Integrated statistics section",
+                "Change history tracking"
+            ],
+            developmentProcess: [
+                {
+                    title: "Research and theoretical foundation",
+                    description: "Research and interviews to understand user needs, system requirements, and functionalities."
+                },
+                {
+                    title: "UI/UX Design",
+                    description: "Creation of an accessible and user-friendly interface for different user profiles."
+                },
+                {
+                    title: "Development with Next JS",
+                    description: "Front-end built with React, Tailwind, and reusable components. Back-end in TypeScript with PostgreSQL."
+                },
+                {
+                    title: "User testing",
+                    description: "Validation with real users and system development professionals."
+                }
+            ],
+            tags: ["Next JS", "Tailwind CSS", "TypeScript", "PostgreSQL", "Figma"],
+            image: kdeImg,
+            github: "https://github.com/Peddrinnz/tcc",
+            timeline: "6 months",
+            team: "3 developers",
+            client: "IFMS Corumbá Campus (multicampus)",
+            status: "Completed"
+        }
     },
+
     {
         slug: "siginf",
-        name: "Projeto SIGINF",
-        description: "Responsável pela atualização completa da interface do SIGINF, um sistema interno da Embrapa Pantanal utilizado para gestão de inventário.",
-        fullDescription: "Trabalhei na modernização completa da interface do Sistema de Gestão de Informações (SIGINF) da Embrapa Pantanal. O projeto incluiu redesign visual, padronização de componentes, correção de inconsistências de usabilidade e implementação de melhorias na experiência do usuário, mantendo a compatibilidade com a base de dados existente.",
-        features: [
-            "Redesign completo da interface do sistema",
-            "Padronização de componentes visuais",
-            "Correção de inconsistências de usabilidade",
-            "Melhoria na experiência do usuário",
-            "Manutenção da compatibilidade com base existente"
-        ],
-        developmentProcess: [
-            {
-                title: "Análise do sistema legado",
-                description: "Estudo detalhado do sistema existente para identificar pontos de melhoria e oportunidades de otimização."
-            },
-            {
-                title: "Design e prototipagem",
-                description: "Criação de wireframes e protótipos para validação das novas interfaces com os usuários."
-            },
-            {
-                title: "Desenvolvimento front-end",
-                description: "Implementação das novas interfaces utilizando PHP, CSS e JavaScript mantendo a integração com o back-end existente."
-            },
-            {
-                title: "Testes e validação",
-                description: "Testes rigorosos com usuários finais para garantir a usabilidade e funcionalidade do sistema."
-            }
-        ],
-        tags: ["PHP", "CSS", "HTML", "MySQL", "JavaScript"],
-        image: embrapaImg,
-        github: "https://github.com/Peddrinnz/siginf",
-        timeline: "3 meses",
-        team: "1 desenvolvedor",
-        client: "Embrapa Pantanal",
-        status: "Concluído"
+        pt: {
+            name: "Projeto SIGINF",
+            description: "Responsável pela atualização completa da interface do SIGINF, sistema interno da Embrapa usado para gestão de inventário.",
+            fullDescription: "Trabalhei na modernização completa da interface do SIGINF. Incluiu redesign visual, padronização de componentes, correção de inconsistências e melhorias na experiência do usuário.",
+            features: [
+                "Redesign completo da interface",
+                "Padronização visual de componentes",
+                "Correção de inconsistências de usabilidade",
+                "Melhoria da experiência do usuário",
+                "Compatibilidade com a base de dados existente"
+            ],
+            developmentProcess: [
+                {
+                    title: "Análise do sistema legado",
+                    description: "Estudo detalhado do sistema atual para identificar problemas e oportunidades."
+                },
+                {
+                    title: "Design e prototipagem",
+                    description: "Criação de wireframes e protótipos validados com usuários."
+                },
+                {
+                    title: "Desenvolvimento front-end",
+                    description: "Implementação utilizando PHP, CSS e JavaScript mantendo integração com o back-end já existente."
+                },
+                {
+                    title: "Testes e validação",
+                    description: "Testes com usuários finais para garantir a qualidade das melhorias."
+                }
+            ],
+            tags: ["PHP", "CSS", "HTML", "MySQL", "JavaScript"],
+            image: embrapaImg,
+            github: "https://github.com/Peddrinnz/siginf",
+            timeline: "3 meses",
+            team: "1 desenvolvedor",
+            client: "Embrapa Pantanal",
+            status: "Concluído"
+        },
+        en: {
+            name: "SIGINF Project",
+            description: "Responsible for the full interface update of SIGINF, an internal Embrapa tool used for inventory management.",
+            fullDescription: "I worked on the complete modernization of the SIGINF interface, including redesign, component standardization, usability fixes, and UX improvements.",
+            features: [
+                "Complete interface redesign",
+                "Visual component standardization",
+                "Usability fixes",
+                "Enhanced user experience",
+                "Compatibility with existing database"
+            ],
+            developmentProcess: [
+                {
+                    title: "Legacy system analysis",
+                    description: "Detailed study of the existing system to identify issues and opportunities."
+                },
+                {
+                    title: "Design and prototyping",
+                    description: "Creation of wireframes and prototypes validated with real users."
+                },
+                {
+                    title: "Front-end development",
+                    description: "Implementation using PHP, CSS, and JavaScript while keeping integration with the existing backend."
+                },
+                {
+                    title: "Testing and validation",
+                    description: "User testing to ensure usability and functionality."
+                }
+            ],
+            tags: ["PHP", "CSS", "HTML", "MySQL", "JavaScript"],
+            image: embrapaImg,
+            github: "https://github.com/Peddrinnz/siginf",
+            timeline: "3 months",
+            team: "1 developer",
+            client: "Embrapa Pantanal",
+            status: "Completed"
+        }
     },
+
     {
         slug: "java-ui",
-        name: "Projeto Java UI",
-        description: "Sistema de Gestão de Biblioteca desenvolvido em Java utilizando o padrão MVC com a variação MVCR.",
-        fullDescription: "Sistema completo de gerenciamento de biblioteca desenvolvido em Java seguindo padrões arquiteturais modernos. O sistema permite cadastro de livros e usuários, controle de empréstimos e devoluções, gestão de reservas e relatórios administrativos. A interface foi construída com Java Swing seguindo princípios de UX.",
-        features: [
-            "Cadastro de livros e usuários",
-            "Controle de empréstimos e devoluções",
-            "Sistema de reservas integrado",
-            "Relatórios administrativos",
-            "Interface desktop com Java Swing"
-        ],
-        developmentProcess: [
-            {
-                title: "Planejamento e arquitetura",
-                description: "Definição da arquitetura MVC com variação MVCR e planejamento das funcionalidades principais."
-            },
-            {
-                title: "Design de interface",
-                description: "Criação da interface desktop utilizando Java Swing com foco na experiência do usuário."
-            },
-            {
-                title: "Desenvolvimento back-end",
-                description: "Implementação da lógica de negócio utilizando Spring Boot e integração com banco de dados."
-            },
-            {
-                title: "Testes e validação",
-                description: "Testes unitários e de integração para garantir a qualidade do sistema."
-            }
-        ],
-        tags: ["Spring Boot", "Java Swing", "Java", "Docker", "Figma"],
-        image: javaImg,
-        github: "https://github.com/Peddrinnz/java_ui",
-        timeline: "4 meses",
-        team: "2 desenvolvedores",
-        client: "Projeto Acadêmico",
-        status: "Concluído"
+        pt: {
+            name: "Projeto Java UI",
+            description: "Sistema de Gestão de Biblioteca desenvolvido em Java seguindo o padrão MVC (variação MVCR).",
+            fullDescription: "Sistema completo de biblioteca com cadastro de livros e usuários, empréstimos, devoluções, reservas e relatórios. Interface construída com Java Swing.",
+            features: [
+                "Cadastro de livros e usuários",
+                "Controle de empréstimos e devoluções",
+                "Sistema de reservas",
+                "Relatórios administrativos",
+                "Interface desktop com Java Swing"
+            ],
+            developmentProcess: [
+                {
+                    title: "Planejamento e arquitetura",
+                    description: "Definição da arquitetura MVC com variação MVCR."
+                },
+                {
+                    title: "Design da interface",
+                    description: "Criação da interface desktop utilizando Java Swing."
+                },
+                {
+                    title: "Desenvolvimento back-end",
+                    description: "Implementação da lógica de negócio usando Spring Boot."
+                },
+                {
+                    title: "Testes e validação",
+                    description: "Testes unitários e de integração."
+                }
+            ],
+            tags: ["Spring Boot", "Java Swing", "Java", "Docker", "Figma"],
+            image: javaImg,
+            github: "https://github.com/Peddrinnz/java_ui",
+            timeline: "4 meses",
+            team: "2 desenvolvedores",
+            client: "Projeto Acadêmico",
+            status: "Concluído"
+        },
+        en: {
+            name: "Java UI Project",
+            description: "Library Management System developed in Java using the MVC pattern (MVCR variation).",
+            fullDescription: "Complete library system including book and user registration, loans, returns, reservations, and reports. Interface built with Java Swing.",
+            features: [
+                "Book and user registration",
+                "Loan and return management",
+                "Reservation system",
+                "Administrative reports",
+                "Desktop interface with Java Swing"
+            ],
+            developmentProcess: [
+                {
+                    title: "Planning and architecture",
+                    description: "Definition of the MVC architecture with MVCR variation."
+                },
+                {
+                    title: "Interface design",
+                    description: "Desktop interface created with Java Swing."
+                },
+                {
+                    title: "Back-end development",
+                    description: "Business logic implemented using Spring Boot."
+                },
+                {
+                    title: "Testing and validation",
+                    description: "Unit and integration tests."
+                }
+            ],
+            tags: ["Spring Boot", "Java Swing", "Java", "Docker", "Figma"],
+            image: javaImg,
+            github: "https://github.com/Peddrinnz/java_ui",
+            timeline: "4 months",
+            team: "2 developers",
+            client: "Academic Project",
+            status: "Completed"
+        }
     },
+
     {
         slug: "studio-pet-care",
-        name: "Studio Pet Care",
-        description: "Landing page desenvolvida para o Studio Pet Care, com design UI/UX criado totalmente no Figma.",
-        fullDescription: "Landing page moderna e responsiva desenvolvida para o Studio Pet Care, uma clínica veterinária. O projeto incluiu criação completa da identidade visual no Figma, desenvolvimento front-end com animações suaves e otimização para SEO. O site apresenta serviços, equipe, depoimentos e formulário de contato integrado.",
-        features: [
-            "Design responsivo para todos os dispositivos",
-            "Animações suaves e interativas",
-            "Otimização para SEO",
-            "Formulário de contato integrado",
-            "Seção de depoimentos de clientes"
-        ],
-        developmentProcess: [
-            {
-                title: "Pesquisa e discovery",
-                description: "Análise do mercado e concorrência para definir a estratégia de design e conteúdo."
-            },
-            {
-                title: "Design UI/UX no Figma",
-                description: "Criação completa da identidade visual, wireframes e protótipos interativos."
-            },
-            {
-                title: "Desenvolvimento front-end",
-                description: "Implementação do design utilizando React, Tailwind CSS e TypeScript com foco em performance."
-            },
-            {
-                title: "Otimização e lançamento",
-                description: "Otimização para SEO, performance e experiência do usuário antes do deploy."
-            }
-        ],
-        tags: ["React", "Tailwind CSS", "Figma", "TypeScript"],
-        image: petImg,
-        github: "https://github.com/Peddrinnz/Studio-Pet-Care",
-        timeline: "1 mês",
-        team: "1 desenvolvedor/designer",
-        client: "Studio Pet Care",
-        status: "Concluído"
-    },
+        pt: {
+            name: "Studio Pet Care",
+            description: "Landing page desenvolvida para o Studio Pet Care, com design criado totalmente no Figma.",
+            fullDescription: "Landing page moderna e responsiva com identidade visual feita no Figma. Inclui serviços, equipe, depoimentos e formulário de contato integrado.",
+            features: [
+                "Design responsivo",
+                "Animações suaves",
+                "Otimização para SEO",
+                "Formulário de contato",
+                "Seção de depoimentos"
+            ],
+            developmentProcess: [
+                {
+                    title: "Pesquisa e discovery",
+                    description: "Análise de mercado e concorrência."
+                },
+                {
+                    title: "Design UI/UX no Figma",
+                    description: "Criação da identidade visual, wireframes e protótipos."
+                },
+                {
+                    title: "Desenvolvimento front-end",
+                    description: "Implementação com React, Tailwind CSS e TypeScript."
+                },
+                {
+                    title: "Otimização e lançamento",
+                    description: "SEO, performance e deploy."
+                }
+            ],
+            tags: ["React", "Tailwind CSS", "Figma", "TypeScript"],
+            image: petImg,
+            github: "https://github.com/Peddrinnz/Studio-Pet-Care",
+            timeline: "1 mês",
+            team: "1 desenvolvedor/designer",
+            client: "Studio Pet Care",
+            status: "Concluído"
+        },
+        en: {
+            name: "Studio Pet Care",
+            description: "Landing page developed for Studio Pet Care, with full UI/UX design created in Figma.",
+            fullDescription: "Modern and responsive landing page with a complete visual identity designed in Figma. Includes services, team, testimonials, and integrated contact form.",
+            features: [
+                "Responsive design",
+                "Smooth animations",
+                "SEO optimization",
+                "Integrated contact form",
+                "Testimonials section"
+            ],
+            developmentProcess: [
+                {
+                    title: "Research and discovery",
+                    description: "Market and competitor analysis."
+                },
+                {
+                    title: "UI/UX Design in Figma",
+                    description: "Visual identity, wireframes, and prototypes."
+                },
+                {
+                    title: "Front-end development",
+                    description: "Implementation using React, Tailwind CSS, and TypeScript."
+                },
+                {
+                    title: "Optimization and launch",
+                    description: "SEO, performance improvements, and deployment."
+                }
+            ],
+            tags: ["React", "Tailwind CSS", "Figma", "TypeScript"],
+            image: petImg,
+            github: "https://github.com/Peddrinnz/Studio-Pet-Care",
+            timeline: "1 month",
+            team: "1 developer/designer",
+            client: "Studio Pet Care",
+            status: "Completed"
+        }
+    }
 ];
 
 export default function Details() {
+    const { language } = useLanguage();
     const params = useParams();
-    const slug = params.slug as string;
-    
+    const slug = params?.slug as string;
+
     const project = projects.find(p => p.slug === slug);
 
     if (!project) {
@@ -187,35 +373,29 @@ export default function Details() {
         );
     }
 
+    const localized = project[language as Lang];
+
     return (
         <section className="min-h-screen bg-(--background) pt-20">
             <div className="border-b border-(--border)">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <Link 
-                        href="/projects"
-                        className="inline-flex items-center gap-2 text-(--primary-color) hover:text-(--primary-color)/80 transition-colors mb-6"
-                    >
-                        <ArrowLeft size={20} />
-                        Voltar para Projetos
-                    </Link>
-                    
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                         <div className="lg:col-span-2">
                             <h1 className="text-4xl sm:text-5xl font-bold text-(--text) mb-4">
-                                {project.name}
+                                {localized.name}
                             </h1>
                             <p className="text-xl text-(--secondary-text) leading-relaxed">
-                                {project.description}
+                                {localized.description}
                             </p>
                         </div>
 
                         <div className="bg-(--cards) border border-(--border) rounded-xl p-6">
                             <h3 className="text-lg font-semibold text-(--text) mb-4">Tecnologias</h3>
                             <div className="flex flex-wrap gap-2">
-                                {project.tags.map((tag, i) => (
+                                {localized.tags.map((tag: string, i: number) => (
                                     <span 
                                         key={i}
-                                        className="px-3 py-1 bg-(--primary-color)/10 border border-(--primary-color)/20 rounded-md text-(--primary-color) text-sm font-medium"
+                                        className="px-3 py-1 bg-(--background)/80 border border-(--primary-color) rounded-md text-(--primary-color) text-sm font-medium"
                                     >
                                         {tag}
                                     </span>
@@ -223,7 +403,7 @@ export default function Details() {
                             </div>
                             
                             <a
-                                href={project.github}
+                                href={localized.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full mt-4 flex items-center justify-center gap-2 bg-(--button) border border-(--border) text-(--text) px-4 py-2 rounded-lg hover:bg-(--hover-button) transition-colors font-medium text-sm"
@@ -236,14 +416,14 @@ export default function Details() {
                 </div>
             </div>
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     <div className="lg:col-span-2 space-y-12">
                         <div className="bg-(--cards) border border-(--border) rounded-xl p-8">
                             <div className="relative w-full h-80 rounded-lg overflow-hidden">
                                 <Image
-                                    src={project.image}
-                                    alt={project.name}
+                                    src={localized.image}
+                                    alt={localized.name}
                                     fill
                                     className="object-contain"
                                 />
@@ -255,14 +435,14 @@ export default function Details() {
                                 Sobre o projeto
                             </h2>
                             <p className="text-(--secondary-text) leading-relaxed mb-8">
-                                {project.fullDescription}
+                                {localized.fullDescription}
                             </p>
 
                             <h3 className="text-xl font-semibold text-(--text) mb-4">
                                 Principais funcionalidades
                             </h3>
                             <ul className="space-y-3">
-                                {project.features.map((feature, index) => (
+                                {localized.features.map((feature: string, index: number) => (
                                     <li key={index} className="flex items-start gap-3">
                                         <CheckCircle size={18} className="text-(--primary-color) mt-0.5 shrink-0" />
                                         <span className="text-(--secondary-text)">{feature}</span>
@@ -276,7 +456,7 @@ export default function Details() {
                                 Processo de Desenvolvimento
                             </h2>
                             <div className="space-y-6">
-                                {project.developmentProcess.map((step, index) => (
+                                {localized.developmentProcess.map((step: DevelopmentStep, index: number) => (
                                     <div key={index} className="border-l-2 border-(--primary-color) pl-6 py-1">
                                         <h3 className="text-lg font-semibold text-(--text) mb-2">
                                             {index + 1}. {step.title}
@@ -298,7 +478,7 @@ export default function Details() {
                             </h3>
                             <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                <span className="text-(--text) font-medium">{project.status}</span>
+                                <span className="text-(--text) font-medium">{localized.status}</span>
                             </div>
                         </div>
 
@@ -310,38 +490,19 @@ export default function Details() {
                             <div className="space-y-4">
                                 <div>
                                     <p className="text-sm text-(--secondary-text)">Duração</p>
-                                    <p className="font-medium text-(--text)">{project.timeline}</p>
+                                    <p className="font-medium text-(--text)">{localized.timeline}</p>
                                 </div>
                                 
                                 <div>
                                     <p className="text-sm text-(--secondary-text)">Equipe</p>
-                                    <p className="font-medium text-(--text)">{project.team}</p>
+                                    <p className="font-medium text-(--text)">{localized.team}</p>
                                 </div>
                                 
                                 <div>
                                     <p className="text-sm text-(--secondary-text)">Cliente</p>
-                                    <p className="font-medium text-(--text)">{project.client}</p>
+                                    <p className="font-medium text-(--text)">{localized.client}</p>
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="bg-linear-to-br from-(--primary-color) to-blue-600 rounded-xl p-6 text-white">
-                            <h3 className="text-lg font-semibold mb-2">Transforme sua ideia em algo real!</h3>
-                            <p className="text-white/80 text-sm mb-4">
-                                Vamos trabalhar juntos no seu próximo projeto.
-                            </p>
-                            <Link
-                                href="/contact"
-                                className="inline-flex items-center justify-center w-full bg-white text-(--primary-color) px-4 py-2 rounded-lg font-medium hover:bg-white/90 transition-colors"
-                            >
-                                Entrar em Contato
-                            </Link>
-                        </div>
-
-                        <div className="text-center pt-6 border-t border-(--border)">
-                            <p className="text-(--secondary-text) text-sm">
-                                © 2025 Pedro Ernesto - Todos os direitos reservados
-                            </p>
                         </div>
                     </div>
                 </div>
