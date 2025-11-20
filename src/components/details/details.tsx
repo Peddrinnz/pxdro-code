@@ -23,6 +23,7 @@ type LocalizedProject = {
     tags: string[];
     image: StaticImageData;
     github: string;
+    link?: string;
     timeline: string;
     team: string;
     client: string;
@@ -70,6 +71,7 @@ export const projects: Project[] = [
             tags: ["Next JS", "Tailwind CSS", "TypeScript", "PostgreSQL", "Figma"],
             image: kdeImg,
             github: "https://github.com/Peddrinnz/tcc",
+            link: "https://tcc-viniszofc.vercel.app",
             timeline: "6 meses",
             team: "3 desenvolvedores",
             client: "IFMS Campus Corumbá (multicampi)",
@@ -107,6 +109,7 @@ export const projects: Project[] = [
             tags: ["Next JS", "Tailwind CSS", "TypeScript", "PostgreSQL", "Figma"],
             image: kdeImg,
             github: "https://github.com/Peddrinnz/tcc",
+            link: "https://tcc-viniszofc.vercel.app",
             timeline: "6 months",
             team: "3 developers",
             client: "IFMS Corumbá Campus (multicampus)",
@@ -304,6 +307,7 @@ export const projects: Project[] = [
             tags: ["React", "Tailwind CSS", "Figma", "TypeScript"],
             image: petImg,
             github: "https://github.com/Peddrinnz/Studio-Pet-Care",
+            link: "https://studio-pet-care.vercel.app",
             timeline: "1 mês",
             team: "1 desenvolvedor/designer",
             client: "Studio Pet Care",
@@ -341,6 +345,7 @@ export const projects: Project[] = [
             tags: ["React", "Tailwind CSS", "Figma", "TypeScript"],
             image: petImg,
             github: "https://github.com/Peddrinnz/Studio-Pet-Care",
+            link: "https://studio-pet-care.vercel.app",
             timeline: "1 month",
             team: "1 developer/designer",
             client: "Studio Pet Care",
@@ -374,6 +379,7 @@ export default function Details() {
     }
 
     const localized = project[language as Lang];
+    const projectLink = (localized as LocalizedProject).link ?? localized.github;
 
     return (
         <section className="min-h-screen bg-(--background) pt-20">
@@ -502,6 +508,17 @@ export default function Details() {
                                     <p className="text-sm text-(--secondary-text)">Cliente</p>
                                     <p className="font-medium text-(--text)">{localized.client}</p>
                                 </div>
+                            </div>
+
+                            <div className="mt-6">
+                                <a
+                                    href={projectLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full flex items-center justify-center gap-2 bg-(--primary-color) px-4 py-2 rounded-md hover:opacity-90 transition-colors font-medium text-sm border border-(--secondary-border)"
+                                >
+                                    {language === 'pt' ? 'Abrir projeto' : 'Open project'}
+                                </a>
                             </div>
                         </div>
                     </div>
