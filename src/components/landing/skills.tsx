@@ -88,10 +88,11 @@ const Skills = () => {
                                 return (
                                     <div
                                         key={index}
-                                        className="flex items-center bg-(--background) backdrop-blur-md px-4 py-3 rounded-md border border-(--border) hover:bg-(--primary-color) hover:text-white transition-colors duration-300 group"
+                                        className="group flex items-center bg-(--background) backdrop-blur-md px-4 py-3 rounded-md border border-(--border) transition-all duration-300
+                                        hover:bg-(--primary-color) hover:text-white hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5"
                                     >
-                                        <IconComponent className="w-5 h-5 mr-3 text-(--primary-color) group-hover:text-white" />
-                                        <span className="text-(--text) group-hover:text-white">
+                                        <IconComponent className="w-5 h-5 mr-3 text-(--primary-color) transition-all duration-300 group-hover:text-white group-hover:scale-110" />
+                                        <span className="transition-all duration-300 group-hover:text-white">
                                             {skill.name}
                                         </span>
                                     </div>
@@ -113,10 +114,11 @@ const Skills = () => {
                                 return (
                                     <div
                                         key={index}
-                                        className="flex items-center bg-(--background) backdrop-blur-md px-4 py-3 rounded-md border border-(--border) hover:bg-(--primary-color) hover:text-white transition-colors duration-300 group"
+                                        className="group flex items-center bg-(--background) backdrop-blur-md px-4 py-3 rounded-md border border-(--border) transition-all duration-300
+                                        hover:bg-(--primary-color) hover:text-white hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5"
                                     >
-                                        <IconComponent className="w-5 h-5 mr-3 text-(--primary-color) group-hover:text-white" />
-                                        <span className="text-(--text) group-hover:text-white">
+                                        <IconComponent className="w-5 h-5 mr-3 text-(--primary-color) transition-all duration-300 group-hover:text-white group-hover:scale-110" />
+                                        <span className="transition-all duration-300 group-hover:text-white">
                                             {skill.name}
                                         </span>
                                     </div>
@@ -138,10 +140,11 @@ const Skills = () => {
                                 return (
                                     <div
                                         key={index}
-                                        className="flex items-center bg-(--background) backdrop-blur-md px-4 py-3 rounded-md border border-(--border) hover:bg-(--primary-color) hover:text-white transition-colors duration-300 group"
+                                        className="group flex items-center bg-(--background) backdrop-blur-md px-4 py-3 rounded-md border border-(--border) transition-all duration-300
+                                        hover:bg-(--primary-color) hover:text-white hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5"
                                     >
-                                        <IconComponent className="w-5 h-5 mr-3 text-(--primary-color) group-hover:text-white" />
-                                        <span className="text-(--text) group-hover:text-white">
+                                        <IconComponent className="w-5 h-5 mr-3 text-(--primary-color) transition-all duration-300 group-hover:text-white group-hover:scale-110" />
+                                        <span className="transition-all duration-300 group-hover:text-white">
                                             {skill.name}
                                         </span>
                                     </div>
@@ -163,7 +166,8 @@ const Skills = () => {
                                 return (
                                     <div
                                         key={index}
-                                        className="flex items-center bg-(--background) backdrop-blur-md px-4 py-3 rounded-md border border-(--border) hover:bg-(--primary-color) hover:text-white transition-colors duration-300 group"
+                                        className="group flex items-center bg-(--background) backdrop-blur-md px-4 py-3 rounded-md border border-(--border) transition-all duration-300
+                                        hover:bg-(--primary-color) hover:text-white hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5"
                                     >
                                         <IconComponent className="w-5 h-5 mr-3 text-(--primary-color) group-hover:text-white" />
                                         <span className="text-(--text) group-hover:text-white">
