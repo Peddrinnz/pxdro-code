@@ -3,7 +3,9 @@
 Este é o meu portfólio pessoal desenvolvido para apresentar minhas habilidades, projetos e experiências na área de desenvolvimento.
 O site foi construído com foco em responsividade, performance e design clean.
 
-# Tecnologias utilizadas
+---
+
+## Tecnologias utilizadas
 
 • Next.js
 • React
@@ -13,7 +15,9 @@ O site foi construído com foco em responsividade, performance e design clean.
 • Particlests
 • Deploy na Vercel
 
-# Funcionalidades
+---
+
+## Funcionalidades
 
 • Tema claro/escuro
 • Internacionalização (i18n)
@@ -21,6 +25,8 @@ O site foi construído com foco em responsividade, performance e design clean.
 • Sessão de projetos
 • Formulário de contato
 
-# Preview
+---
+
+## Preview
 
 Pode ser acessado em: https://pxdro-code.vercel.app
