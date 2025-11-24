@@ -2,30 +2,30 @@
 
 # My Portfolio — pxdro-code
 
-This is my personal portfolio developed to showcase my skills, projects, and experience in software development.  
+This is my personal portfolio developed to showcase my skills, projects, and experience in software development.<br>
 The website was built with a focus on responsiveness, performance, and a clean design.
 
 ---
 
 ## Technologies Used
 
-- Next.js  
-- React  
-- TailwindCSS  
-- TypeScript  
-- Figma  
-- Particlests  
-- Deployment on Vercel  
+• Next.js<br>  
+• React<br>
+• TailwindCSS<br>  
+• TypeScript<br> 
+• Figma<br>  
+• Particlests<br>  
+• Deployment on Vercel<br>  
 
 ---
 
 ## Features
 
-- Light/Dark theme  
-- Internationalization (i18n)  
-- Fully responsive layout  
-- Projects section  
-- Contact form  
+• Light/Dark theme<br>  
+• Internationalization (i18n)<br>  
+• Fully responsive layout<br>  
+• Projects section<br>  
+• Contact form<br>  
 
 ---
 
